@@ -17,7 +17,6 @@ public class AdminController {
 
     @RequestMapping("/loginController")
     public String AdminLoginController(Admin admin, String vcode, HttpSession session) {
-        System.out.println(admin);
         Admin adminInDb = adminService.queryOneAdminByUsername(admin.getUsername());
         if (adminInDb == null) {
             return "redirect:/login.jsp";
@@ -27,7 +26,7 @@ public class AdminController {
                 if (vcode.toLowerCase().equals(validCode)) {
                     //三次校验正确
                     session.setAttribute("username", adminInDb.getUsername());
-                    return "redirect:/main/main.jsp";
+                    return "redirect:/menu/queryAll";
                 } else {
                     return "redirect:/login.jsp";
                 }

@@ -1,4 +1,5 @@
-﻿<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
+﻿<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" isELIgnored="false" %>
+<%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -19,26 +20,37 @@
     <div style="font-size: 24px;color: #FAF7F7;font-family: 楷体;font-weight: 900;width: 500px;float:left;padding-left: 20px;padding-top: 10px">
         持名法州后台管理系统
     </div>
-    <div style="font-size: 16px;color: #FAF7F7;font-family: 楷体;width: 300px;float:right;padding-top:15px">欢迎您:xxxxx
-        &nbsp;<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">修改密码</a>&nbsp;&nbsp;<a href="#"
-                                                                                                              class="easyui-linkbutton"
-                                                                                                              data-options="iconCls:'icon-01'">退出系统</a>
+    <div style="font-size: 16px;color: #FAF7F7;font-family: 楷体;width: 300px;float:right;padding-top:15px">
+        欢迎您:${sessionScope.username}
+        &nbsp;<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">修改密码</a>&nbsp;&nbsp;
+        <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-01'">退出系统</a>
     </div>
-</div>
-<div data-options="region:'south',split:true" style="height: 40px;background: #5C160C">
-    <div style="text-align: center;font-size:15px; color: #FAF7F7;font-family: 楷体">&copy;百知教育 htf@zparkhr.com.cn</div>
 </div>
 
 <div data-options="region:'west',title:'导航菜单',split:true" style="width:220px;">
     <div id="aa" class="easyui-accordion" data-options="fit:true">
-
+        <c:forEach items="${list}" var="index">
+            <div title=${index.title} data-options=${index.iconcls} style="overflow:auto;padding:10px;">
+                <c:set value="${index.menus}" var="subInfo"/>
+                <c:forEach items="${subInfo}" var="index2">
+                    <h4>${index2.title}</h4>
+                </c:forEach>
+            </div>
+        </c:forEach>
     </div>
 </div>
+
 <div data-options="region:'center'">
     <div id="tt" class="easyui-tabs" data-options="fit:true,narrow:true,pill:true">
         <div title="主页" data-options="iconCls:'icon-neighbourhood',"
-             style="background-image:url(image/shouye.jpg);background-repeat: no-repeat;background-size:100% 100%;"></div>
+             style="background-image:url(${pageContext.request.contextPath}/main/image/shouye.jpg);background-repeat: no-repeat;background-size:100% 100%;">
+        </div>
     </div>
+</div>
+
+
+<div data-options="region:'south',split:true" style="height: 40px;background: #5C160C">
+    <div style="text-align: center;font-size:15px; color: #FAF7F7;font-family: 楷体">&copy;百知教育 dhg@zparkhr.com.cn</div>
 </div>
 </body>
 </html>
