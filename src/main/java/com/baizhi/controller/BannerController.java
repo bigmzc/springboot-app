@@ -49,7 +49,6 @@ public class BannerController {
             file.transferTo(dest);
         } catch (IOException e) {
             e.printStackTrace();
-
         }
     }
 
