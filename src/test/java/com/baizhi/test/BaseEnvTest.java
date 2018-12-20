@@ -1,7 +1,10 @@
 package com.baizhi.test;
 
+import com.baizhi.entity.Banner;
+import com.baizhi.mapper.BannerMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -9,7 +12,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class BaseEnvTest {
 
+    @Autowired
+    private BannerMapper bannerMapper;
+
     @Test
     public void test1() {
+
+        int count = bannerMapper.selectCount(new Banner());
+        System.out.println(count);
     }
 }
