@@ -35,4 +35,12 @@ public class BannerServiceImpl implements BannerService {
     public void insertOneBanner(Banner banner) {
         bannerMapper.insert(banner);
     }
+
+    @Override
+    public void deleteOneBannerById(String bannerId) {
+        Banner banner = new Banner();
+        banner.setId(Integer.parseInt(bannerId));
+        int res = bannerMapper.deleteByPrimaryKey(banner);
+        System.out.println(res);
+    }
 }

@@ -14,7 +14,7 @@
             handler: function () {
                 //获取选中行
                 var row = $("#bannerdatagrid").edatagrid("getSelected");
-                console.log(row);
+                //console.log(row);
                 if (row != null) {
                     //编辑指定行，行下标
                     var index = $("#bannerdatagrid").edatagrid("getRowIndex", row);
@@ -27,7 +27,19 @@
             text: "删除",
             iconCls: 'icon-remove',
             handler: function () {
-                alert('帮助按钮')
+                //alert('帮助按钮')
+                var row = $("#bannerdatagrid").edatagrid("getSelected");
+                if (row != null) {
+                    $.post("${pageContext.request.contextPath}/banner/deleteOneBanner?bannerId=" + row.id, function (data) {
+                        $.messager.show({
+                            title: "tips",
+                            msg: "delete success!"
+                        });
+                        $("#bannerdatagrid").edatagrid("reload");
+                    });
+                } else {
+                    alert("请先选中行");
+                }
             }
         }, '-', {
             text: "保存",

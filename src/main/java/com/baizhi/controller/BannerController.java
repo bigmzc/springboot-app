@@ -52,4 +52,10 @@ public class BannerController {
 
         }
     }
+
+    @RequestMapping("/deleteOneBanner")
+    @ResponseBody
+    public void deleteOneBannerInfo(String bannerId) {
+        bannerService.deleteOneBannerById(bannerId);
+    }
 }
