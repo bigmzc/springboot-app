@@ -36,8 +36,10 @@ public class BannerController {
     @RequestMapping("/fileupload")
     @ResponseBody
     public void addOneBanner(MultipartFile file, Banner banner) {
-        bannerService.insertOneBanner(banner);
         String fileName = file.getOriginalFilename();
+        String imgPath = "/img/test/" + fileName;
+        banner.setImgPath(imgPath);
+        bannerService.insertOneBanner(banner);
         int size = (int) file.getSize();
         System.out.println(fileName + "----" + size);
 

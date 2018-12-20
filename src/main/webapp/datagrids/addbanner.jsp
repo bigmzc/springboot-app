@@ -68,7 +68,7 @@
                 <td>
                     选择文件:<input type="file" name="file" size="3">
                     <br>
-                    文件路径:<input id="addBannerFilePath" name="imgPath"/>
+                    <%--文件路径:<input id="addBannerFilePath" name="imgPath"/>--%>
                 </td>
             </tr>
             <tr>
