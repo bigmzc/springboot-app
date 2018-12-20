@@ -30,4 +30,9 @@ public class BannerServiceImpl implements BannerService {
         bannerMapper.updateByPrimaryKeySelective(banner);
         //int i = bannerMapper.updateByPrimaryKey(banner);
     }
+
+    @Override
+    public void insertOneBanner(Banner banner) {
+        bannerMapper.insert(banner);
+    }
 }

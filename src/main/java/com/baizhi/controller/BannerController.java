@@ -7,6 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/banner")
@@ -25,7 +29,25 @@ public class BannerController {
     @RequestMapping("/updateStatus")
     @ResponseBody
     public void updateBannerStatus(Banner banner) {
-        System.out.println(banner);
+        //System.out.println(banner);
         bannerService.updateBannerStatus(banner);
+    }
+
+    @RequestMapping("/fileupload")
+    @ResponseBody
+    public void addOneBanner(MultipartFile file, Banner banner) {
+        bannerService.insertOneBanner(banner);
+        String fileName = file.getOriginalFilename();
+        int size = (int) file.getSize();
+        System.out.println(fileName + "----" + size);
+
+        String path = "F:/source/springboot-app/src/main/webapp/img/test";
+        File dest = new File(path + "/" + fileName);
+        try {
+            file.transferTo(dest);
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
     }
 }

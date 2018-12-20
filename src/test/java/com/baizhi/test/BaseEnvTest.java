@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.servlet.http.HttpSession;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class BaseEnvTest {
@@ -27,7 +29,7 @@ public class BaseEnvTest {
     }
 
     @Test
-    public void test2() {
+    public void test2(HttpSession session) {
         Banner banner = new Banner();
         banner.setId(9);
         banner.setStatus("Y");

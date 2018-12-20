@@ -5,7 +5,8 @@
             iconCls: 'icon-add',
             text: "添加",
             handler: function () {
-                alert('编辑按钮')
+                //alert('编辑按钮')
+                $("#addBannerDialog").dialog("open");
             }
         }, '-', {
             text: "修改",
@@ -71,6 +72,18 @@
                     '</tr></table>';
             }
         });
+
+        //初始化添加轮播图
+        $("#addBannerDialog").dialog({
+            title: "添加轮播图",
+            width: 400,
+            height: 200,
+            closed: true,
+            cache: false,
+            modal: true,
+            href: "${pageContext.request.contextPath}/datagrids/addbanner.jsp"
+        });
     })
 </script>
 <table id="bannerdatagrid"></table>
+<div id="addBannerDialog"></div>
