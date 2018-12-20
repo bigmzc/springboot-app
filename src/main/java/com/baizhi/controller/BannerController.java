@@ -1,6 +1,7 @@
 package com.baizhi.controller;
 
 import com.baizhi.dto.BannerDto;
+import com.baizhi.entity.Banner;
 import com.baizhi.service.BannerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,5 +20,12 @@ public class BannerController {
     public BannerDto queryBannerByPage(int page, int rows) {
         BannerDto bannerDto = bannerService.queryBannerByPage(page, rows);
         return bannerDto;
+    }
+
+    @RequestMapping("/updateStatus")
+    @ResponseBody
+    public void updateBannerStatus(Banner banner) {
+        System.out.println(banner);
+        bannerService.updateBannerStatus(banner);
     }
 }

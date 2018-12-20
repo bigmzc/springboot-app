@@ -21,8 +21,6 @@
                 } else {
                     alert("请先选中行")
                 }
-
-
             }
         }, '-', {
             text: "删除",
@@ -34,7 +32,8 @@
             text: "保存",
             iconCls: 'icon-save',
             handler: function () {
-                $("#bannerdatagrid").edatagrid("saveRow")
+                $("#bannerdatagrid").edatagrid("saveRow");
+                $("#bannerdatagrid").edatagrid("reload");
             }
         }];
 
@@ -42,11 +41,16 @@
         $('#bannerdatagrid').edatagrid({
             //url 加载分页数据-pagedto集合，默认使用post请求方式，
             // 如果加载静态资源，修改method:"GET"
-            updateUrl: "${pageContext.request.contextPath}/banner/update",
+            updateUrl: "${pageContext.request.contextPath}/banner/updateStatus",
             url: "${pageContext.request.contextPath}/banner/queryBannerByPage",
             columns: [[
                 {field: 'title', title: '名称', width: 100},
-                {field: 'status', title: '状态', width: 100},
+                {
+                    field: 'status', title: '状态', width: 100, editor: {
+                        type: "text",
+                        options: {required: true}
+                    }
+                },
                 {field: 'imgPath', title: '路径', width: 100},
                 {field: 'pubDate', title: '时间', width: 100},
             ]],

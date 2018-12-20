@@ -24,4 +24,10 @@ public class BannerServiceImpl implements BannerService {
         bannerDto.setRows(bannerMapper.queryBannerByPage(curPage, pageSize));
         return bannerDto;
     }
+
+    @Override
+    public void updateBannerStatus(Banner banner) {
+        bannerMapper.updateByPrimaryKeySelective(banner);
+        //int i = bannerMapper.updateByPrimaryKey(banner);
+    }
 }
