@@ -18,8 +18,17 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-    public List<Menu> queryAllMenu() {
-        List<Menu> menus = menuMapper.queryAllMenu();
+    public List<Menu> queryAllMainMenu() {
+        List<Menu> menus = menuMapper.queryAllMainMenu();
         return menus;
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public List<Menu> querySubMenus(String parentId) {
+        Menu menu = new Menu();
+        menu.setParentId(Integer.parseInt(parentId));
+        List<Menu> subMenus = menuMapper.select(menu);
+        return subMenus;
     }
 }

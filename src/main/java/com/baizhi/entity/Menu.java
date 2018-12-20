@@ -6,9 +6,7 @@ import lombok.NoArgsConstructor;
 import tk.mybatis.mapper.annotation.KeySql;
 
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import java.io.Serializable;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -21,6 +19,6 @@ public class Menu implements Serializable {
     private String iconcls;
     private String url;
     private Integer parentId;
-    @Transient
-    private List<Menu> menus;
+    /*@Transient
+    private List<Menu> menus;*/
 }

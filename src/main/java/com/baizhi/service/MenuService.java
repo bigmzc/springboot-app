@@ -9,5 +9,7 @@ import java.util.List;
 @Service
 @Transactional
 public interface MenuService {
-    List<Menu> queryAllMenu();
+    List<Menu> queryAllMainMenu();
+
+    List<Menu> querySubMenus(String parentId);
 }

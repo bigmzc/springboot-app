@@ -18,9 +18,13 @@
         </collection>
     </resultMap>
 
-    <select id="queryAllMenu" resultMap="rm1">
+    <!--<select id="queryAllMenu" resultMap="rm1">
         select m.Id mid,m.title mtitle,m.Iconcls mIconcls,m.url murl,m.parent_id mparentid,
         s.Id sid,s.title stitle,s.Iconcls sIconcls,s.url surl,s.parent_id sparentid
         from menu m join menu s on m.Id = s.parent_id
+    </select>-->
+
+    <select id="queryAllMainMenu" resultType="Menu">
+      select Id,title,Iconcls,url,parent_id parentId from menu where parent_id is null
     </select>
 </mapper>

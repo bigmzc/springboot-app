@@ -12,6 +12,11 @@
     <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
     <script type="text/javascript">
         <!--菜单处理-->
+        $(function () {
+            $("#btn").linkbutton({})
+        });
+
+
     </script>
 
 </head>
@@ -30,10 +35,11 @@
 <div data-options="region:'west',title:'导航菜单',split:true" style="width:220px;">
     <div id="aa" class="easyui-accordion" data-options="fit:true">
         <c:forEach items="${list}" var="index">
-            <div title=${index.title} data-options=${index.iconcls} style="overflow:auto;padding:10px;">
+            <div title=${index.title} data-options="${index.iconcls}" style="overflow:auto;padding:10px;">
                 <c:set value="${index.menus}" var="subInfo"/>
                 <c:forEach items="${subInfo}" var="index2">
                     <h4>${index2.title}</h4>
+                    <a id="btn" href="#">easyui</a>
                 </c:forEach>
             </div>
         </c:forEach>

@@ -26,7 +26,7 @@ public class AdminController {
                 if (vcode.toLowerCase().equals(validCode)) {
                     //三次校验正确
                     session.setAttribute("username", adminInDb.getUsername());
-                    return "redirect:/menu/queryAll";
+                    return "redirect:/main/main2.jsp";
                 } else {
                     return "redirect:/login.jsp";
                 }
