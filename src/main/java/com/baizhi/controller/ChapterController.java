@@ -38,6 +38,7 @@ public class ChapterController {
         //获取文件大小
         long size = file.getSize();
         System.out.println(size);
+
         double mbSize = size / 1048576;
         System.out.println(mbSize);
         String mbSize2 = mbSize + "" + "M";
