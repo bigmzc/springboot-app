@@ -95,6 +95,20 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
+
+        <!--分页插件pagehelper集成springboot-->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.2.2</version>
+        </dependency>
+
+        <!--解析音频时长-->
+        <dependency>
+            <groupId>com.jave</groupId>
+            <artifactId>jave-audio</artifactId>
+            <version>1.0.2</version>
+        </dependency>
     </dependencies>
 
     <build>

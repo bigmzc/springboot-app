@@ -41,7 +41,7 @@ public class BannerController {
         banner.setImgPath(imgPath);
         bannerService.insertOneBanner(banner);
         int size = (int) file.getSize();
-        System.out.println(fileName + "----" + size);
+        //System.out.println(fileName + "----" + size);
 
         String path = "F:/source/springboot-app/src/main/webapp/img/test";
         File dest = new File(path + "/" + fileName);

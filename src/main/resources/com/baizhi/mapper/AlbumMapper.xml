@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baizhi.mapper.AlbumMapper">
+
+    <resultMap id="rm1" type="Album">
+        <id column="aid" property="id"/>
+        <result column="atitle" property="title"/>
+        <result column="acount" property="count"/>
+        <result column="acoverImg" property="coverImg"/>
+        <result column="ascore" property="score"/>
+        <result column="aauthor" property="author"/>
+        <result column="abroacast" property="broadcast"/>
+        <result column="abrief" property="brief"/>
+        <result column="apubdate" property="pubDate"/>
+
+        <collection property="children" ofType="Chapter">
+            <id column="cid" property="id"/>
+            <result column="ctitle" property="title"/>
+            <result column="csize" property="size"/>
+            <result column="cduration" property="duration"/>
+            <result column="curl" property="url"/>
+            <result column="cuploaddate" property="uploadDate"/>
+        </collection>
+    </resultMap>
+
+    <select id="queryAllAlbumByPage" resultMap="rm1">
+        select a.Id aid,a.title atitle,a.count acount,a.cover_img acoverImg,a.score ascore,
+        a.author aauthor,a.broadcast abroacast,a.brief abrief,a.pub_date apubdate,
+        c.Id cid,c.title ctitle,c.size csize,c.duration cduration,c.url curl,c.upload_date cuploaddate
+        from (select * from album limit ${(curPage-1)*pageSize},${pageSize}) a left join chapter c on a.Id = c.album_id
+    </select>
+
+</mapper>
