@@ -15,6 +15,8 @@
     <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
     <script type="text/javascript">
         <!--菜单处理-->
+        var globalId;
+        var globalId2;
         $(function () {
             $.post("${pageContext.request.contextPath}/menu/queryMainMenu", function (data) {
                 //console.log(data);

@@ -25,10 +25,22 @@ public class AlbumServiceImpl implements AlbumService {
         int count = albumMapper.selectCount(new Album());
         //PageHelper.startPage(curPage, pageSize);
         List<Album> albums = albumMapper.queryAllAlbumByPage(curPage, pageSize);
-        System.out.println(albums);
         albumDto.setTotal(count);
         albumDto.setRows(albums);
-        //分页插件
         return albumDto;
+    }
+
+    @Override
+    public void insertOneAlbum(Album album) {
+        albumMapper.insert(album);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public Album queryOneAlbumById(Integer id) {
+        Album album = new Album();
+        album.setId(id);
+        Album album1 = albumMapper.selectOne(album);
+        return album1;
     }
 }

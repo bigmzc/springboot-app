@@ -15,6 +15,10 @@ spring:
     username: root
     password: root
     driver-class-name: com.mysql.jdbc.Driver
+  http:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 1000MB
 mybatis:
   mapper-locations: classpath:com/baizhi/mapper/*Mapper.xml
   type-aliases-package: com.baizhi.entity
