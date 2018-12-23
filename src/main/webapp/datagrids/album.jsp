@@ -72,7 +72,7 @@
                 {field: 'title', title: '名称', width: 60},
                 {field: 'url', title: '下载路径', width: 60},
                 {field: 'size', title: '章节大小', width: 80},
-                {field: 'duration', title: '章节时长', width: 80}
+                {field: 'duration', title: '章节时长', width: 80,}
             ]],
             fit: true,
             fitColumns: true,
@@ -80,6 +80,15 @@
             pagination: true,
             pageSize: 5,
             pageList: [3, 5, 7, 10],
+            onDblClickRow: function (row) {
+
+            },
+            onDblClickCell: function (field, row) {
+                console.log(row);
+                console.log(field);
+                $('#win').window('open');
+                $("#audiobro").prop("src", "${pageContext.request.contextPath}" + row.url);
+            }
         });
 
         //初始化添加轮播图
@@ -121,3 +130,9 @@
 <div id="addAlbumDialog"></div>
 <div id="albumInfoDialog"></div>
 <div id="addAudioDialog"></div>
+<div id="win" class="easyui-window" title="音频播放" style="width:350px;height:100px"
+     data-options="iconCls:'icon-save',modal:false,closed:true">
+    <audio id="audiobro" src="/i/horse.ogg" controls="controls">
+        Your browser does not support the audio element.
+    </audio>
+</div>
