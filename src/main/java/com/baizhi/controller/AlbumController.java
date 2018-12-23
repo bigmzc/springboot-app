@@ -27,6 +27,7 @@ public class AlbumController {
         return albumDto;
     }
 
+    //文件上传
     @RequestMapping("/addOneAlbum")
     @ResponseBody
     public void addOneAlbum(MultipartFile file, Album album) {
@@ -53,4 +54,5 @@ public class AlbumController {
         Album album = albumService.queryOneAlbumById(id);
         return album;
     }
+
 }

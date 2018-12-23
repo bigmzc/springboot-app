@@ -43,7 +43,22 @@
             text: "音频下载",
             iconCls: 'icon-save',
             handler: function () {
+                var row4 = $("#albumdatagrid").treegrid("getSelected");
+                console.log(row4.url);
+                if (row4 != null) {
+                    /*$.post("/chapter/download2?fileName="+row4.url,function (data) {
+                        //
+                    });*/
+                    /*$.ajax({
+                        url:"/chapter/download",
+                        data:"fileName="+row4.url,
+                        async:false,
+                        success:function (result) {
 
+                        }
+                    });*/
+                    window.location.href = "${pageContext.request.contextPath}/chapter/download2?fileName=" + row4.url;
+                }
             }
         }];
 
@@ -81,8 +96,8 @@
         //初始化专辑详情Dialog
         $("#albumInfoDialog").dialog({
             title: "专辑详情",
-            width: 200,
-            height: 150,
+            width: 400,
+            height: 300,
             closed: true,
             cache: false,
             modal: true,

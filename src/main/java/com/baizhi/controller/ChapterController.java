@@ -5,14 +5,18 @@ import com.baizhi.service.ChapterService;
 import it.sauronsoftware.jave.Encoder;
 import it.sauronsoftware.jave.EncoderException;
 import it.sauronsoftware.jave.MultimediaInfo;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.*;
+import java.net.URLEncoder;
 import java.util.UUID;
 
 @Controller
@@ -22,12 +26,14 @@ public class ChapterController {
     @Autowired
     private ChapterService chapterService;
 
+    //音频上传
     @RequestMapping("/uploadFile")
     @ResponseBody
     public void addOneAudioFile(MultipartFile file, Chapter chapter) {
 
         String fileName = file.getOriginalFilename();
         String path = "F:/source/springboot-app/src/main/webapp/audio/audios";
+        //String path = "F:/";
         File dest = new File(path + "/" + fileName);
         try {
             file.transferTo(dest);
@@ -64,5 +70,71 @@ public class ChapterController {
         chapter.setDuration(duration);
         chapter.setUrl(filePath);
         chapterService.insertMultiAudio(chapter);
+    }
+
+    //文件下载
+    @RequestMapping("/download")
+    @ResponseBody
+    public void fileDownload(HttpServletResponse response, String fileName) throws UnsupportedEncodingException {
+        System.out.println(fileName);
+        String[] strings = fileName.split("/");
+
+        String realFileName = strings[3];
+        System.out.println(realFileName);
+
+        String filePath = "F:/source/springboot-app/src/main/webapp";
+        File file = new File(filePath + fileName);
+        if (file.exists()) {
+            System.out.println("file----------exits");
+            response.setContentType("application/force-download");
+            response.setHeader("content-disposition", "attachment;filename=" + URLEncoder.encode(realFileName, "UTf-8"));
+            byte[] buffer = new byte[1024];
+
+            FileInputStream fis = null;
+            BufferedInputStream bis = null;
+            OutputStream os = null;
+
+            try {
+                os = response.getOutputStream();
+                fis = new FileInputStream(file);
+                bis = new BufferedInputStream(fis);
+                int read = bis.read(buffer);
+                while (read != -1) {
+                    os.write(buffer);
+                    read = bis.read(buffer);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    bis.close();
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    //文件下载2
+    @RequestMapping("/download2")
+    public void fileDownload2(HttpSession session, HttpServletResponse response, String fileName)
+            throws Exception {
+        String[] strings = fileName.split("/");
+        String realFileName = strings[3];
+        System.out.println(realFileName + "---------------------");
+        String realPath = session.getServletContext().getRealPath("/audio/audios");
+        System.out.println(realPath + "------------------------");
+        byte[] bs = FileUtils.readFileToByteArray(new File(realPath + "/" + realFileName));
+        //设置响应头信息：以附件形式下载
+        response.setHeader("content-disposition", "attachment;filename=" + URLEncoder.encode(realFileName, "UTF-8"));
+        ServletOutputStream out = response.getOutputStream();
+        out.write(bs);
+        if (out != null) {
+            out.flush();
+        }
+        if (out != null) {
+            out.close();
+        }
     }
 }
