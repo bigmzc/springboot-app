@@ -55,6 +55,18 @@
                     window.location.href = "${pageContext.request.contextPath}/chapter/download2?fileName=" + row4.url + "&title=" + row4.title;
                 }
             }
+        }, '-', {
+            text: "导入",
+            iconCls: 'icon-add',
+            handler: function () {
+
+            }
+        }, '-', {
+            text: "导出",
+            iconCls: 'icon-add',
+            handler: function () {
+                location.href = "${pageContext.request.contextPath}/poi/export";
+            }
         }];
 
 
@@ -127,7 +139,7 @@
 <div id="addAudioDialog"></div>
 <div id="win" class="easyui-window" title="音频播放" style="width:350px;height:100px"
      data-options="iconCls:'icon-save',modal:false,closed:true">
-    <audio id="audiobro" src="/i/horse.ogg" controls="controls">
+    <audio id="audiobro" src="#" controls="controls">
         Your browser does not support the audio element.
     </audio>
 </div>

@@ -96,7 +96,7 @@
             <version>1.2</version>
         </dependency>
 
-        <!--分页插件pagehelper集成springboot-->
+        <!--分页插件pagehelper集成springboot启动器-->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
@@ -108,6 +108,23 @@
             <groupId>com.jave</groupId>
             <artifactId>jave-audio</artifactId>
             <version>1.0.2</version>
+        </dependency>
+
+        <!--到处Excel相关-->
+        <dependency>
+            <groupId>cn.afterturn</groupId>
+            <artifactId>easypoi-base</artifactId>
+            <version>3.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.afterturn</groupId>
+            <artifactId>easypoi-web</artifactId>
+            <version>3.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.afterturn</groupId>
+            <artifactId>easypoi-annotation</artifactId>
+            <version>3.2.0</version>
         </dependency>
     </dependencies>
 

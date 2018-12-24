@@ -43,4 +43,14 @@ public class AlbumServiceImpl implements AlbumService {
         Album album1 = albumMapper.selectOne(album);
         return album1;
     }
+
+    @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public List<Album> getAllAlbumAndAudio() {
+        int curPage = 1;
+        AlbumDto albumDto = new AlbumDto();
+        int count = albumMapper.selectCount(new Album());
+        List<Album> albums = albumMapper.queryAllAlbumByPage(curPage, count);
+        return albums;
+    }
 }

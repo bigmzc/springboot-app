@@ -30,4 +30,5 @@
         from (select * from album limit ${(curPage-1)*pageSize},${pageSize}) a left join chapter c on a.Id = c.album_id
     </select>
 
+
 </mapper>
