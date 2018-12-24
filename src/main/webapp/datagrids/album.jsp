@@ -10,9 +10,13 @@
                 //console.log(row2);
                 if (row2 != null) {
                     //编辑指定行，行下标
-                    var index2 = row2.id;
-                    globalId = index2;
-                    $("#albumInfoDialog").dialog("open");
+                    if (row2.duration == null) {
+                        var index2 = row2.id;
+                        globalId = index2;
+                        $("#albumInfoDialog").dialog("open");
+                    } else {
+                        alter("请选中专辑");
+                    }
                 } else {
                     alert("请先选中行")
                 }
@@ -30,11 +34,13 @@
             iconCls: 'icon-add',
             handler: function () {
                 var row3 = $("#albumdatagrid").treegrid("getSelected");
-                console.log(row3);
                 if (row3 != null) {
-                    globalId2 = row3.id;
-                    console.log(globalId2);
-                    $("#addAudioDialog").dialog("open");
+                    if (row3.duration == null) {
+                        globalId2 = row3.id;
+                        $("#addAudioDialog").dialog("open");
+                    } else {
+                        alert('请选择专辑!');
+                    }
                 } else {
                     alert('请选中行');
                 }
@@ -46,18 +52,7 @@
                 var row4 = $("#albumdatagrid").treegrid("getSelected");
                 console.log(row4.url);
                 if (row4 != null) {
-                    /*$.post("/chapter/download2?fileName="+row4.url,function (data) {
-                        //
-                    });*/
-                    /*$.ajax({
-                        url:"/chapter/download",
-                        data:"fileName="+row4.url,
-                        async:false,
-                        success:function (result) {
-
-                        }
-                    });*/
-                    window.location.href = "${pageContext.request.contextPath}/chapter/download2?fileName=" + row4.url;
+                    window.location.href = "${pageContext.request.contextPath}/chapter/download2?fileName=" + row4.url + "&title=" + row4.title;
                 }
             }
         }];
@@ -84,8 +79,8 @@
 
             },
             onDblClickCell: function (field, row) {
-                console.log(row);
-                console.log(field);
+                /*                console.log(row);
+                                console.log(field);*/
                 $('#win').window('open');
                 $("#audiobro").prop("src", "${pageContext.request.contextPath}" + row.url);
             }

@@ -6,6 +6,7 @@ import it.sauronsoftware.jave.Encoder;
 import it.sauronsoftware.jave.EncoderException;
 import it.sauronsoftware.jave.MultimediaInfo;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.*;
+import java.math.BigDecimal;
 import java.net.URLEncoder;
 import java.util.UUID;
 
@@ -43,11 +45,9 @@ public class ChapterController {
 
         //获取文件大小
         long size = file.getSize();
-        System.out.println(size);
-
-        double mbSize = size / 1048576;
-        System.out.println(mbSize);
-        String mbSize2 = mbSize + "" + "M";
+        double mbSize = size / (1024 * 1024.0);
+        double value = new BigDecimal(mbSize).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+        String mbSize2 = value + "" + "M";
 
         //获取文件时长
         Encoder encoder = new Encoder();
@@ -118,23 +118,35 @@ public class ChapterController {
 
     //文件下载2
     @RequestMapping("/download2")
-    public void fileDownload2(HttpSession session, HttpServletResponse response, String fileName)
-            throws Exception {
+    public void fileDownload2(HttpSession session, HttpServletResponse response, String fileName, String title) {
         String[] strings = fileName.split("/");
         String realFileName = strings[3];
-        System.out.println(realFileName + "---------------------");
         String realPath = session.getServletContext().getRealPath("/audio/audios");
-        System.out.println(realPath + "------------------------");
-        byte[] bs = FileUtils.readFileToByteArray(new File(realPath + "/" + realFileName));
+        byte[] bs = new byte[0];
+        try {
+            bs = FileUtils.readFileToByteArray(new File(realPath + "/" + realFileName));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String extension = FilenameUtils.getExtension(fileName);
+        String backName = title + "." + extension;
         //设置响应头信息：以附件形式下载
-        response.setHeader("content-disposition", "attachment;filename=" + URLEncoder.encode(realFileName, "UTF-8"));
-        ServletOutputStream out = response.getOutputStream();
-        out.write(bs);
-        if (out != null) {
-            out.flush();
+        try {
+            response.setHeader("content-disposition", "attachment;filename=" + URLEncoder.encode(backName, "UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
-        if (out != null) {
-            out.close();
+        response.setContentType("audio/mpeg");
+        try {
+            ServletOutputStream out = response.getOutputStream();
+            out.write(bs);
+            if (out != null) {
+                out.flush();
+                out.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
     }
 }
