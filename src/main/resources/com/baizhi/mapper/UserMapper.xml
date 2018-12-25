@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baizhi.mapper.UserMapper">
+    <select id="queryActiversUser" resultType="java.lang.Integer">
+        select count(*) from user where datediff(now(),reg_date) &lt;${timeLength}
+    </select>
+
+    <select id="queryUsersDistrubution" resultType="Province">
+        select count(*) value,province name from user group by province
+    </select>
+
+    <select id="queryUsersDistrubutionBySex" resultType="Province">
+        select count(*) value,province name from user where sex=${sex} group by province
+    </select>
+</mapper>

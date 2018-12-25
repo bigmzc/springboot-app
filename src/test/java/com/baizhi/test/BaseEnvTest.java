@@ -2,11 +2,15 @@ package com.baizhi.test;
 
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.entity.ExportParams;
+import com.baizhi.dto.UserDto;
 import com.baizhi.entity.Album;
 import com.baizhi.entity.Banner;
+import com.baizhi.entity.Province;
 import com.baizhi.mapper.AlbumMapper;
 import com.baizhi.mapper.BannerMapper;
+import com.baizhi.mapper.UserMapper;
 import com.baizhi.service.BannerService;
+import com.baizhi.service.UserService;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -20,6 +24,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -34,6 +39,12 @@ public class BaseEnvTest {
 
     @Autowired
     private AlbumMapper albumMapper;
+
+    @Autowired
+    private UserMapper userMapper;
+
+    @Autowired
+    UserService userService;
 
     @Test
     public void test1() {
@@ -77,5 +88,19 @@ public class BaseEnvTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void test5() {
+        /*Integer integer = userMapper.queryActiversUser(7);
+        System.out.println(integer);*/
+        UserDto userDto = userService.queryActiveUsers();
+        System.out.println(userDto);
+    }
+
+    @Test
+    public void test6() {
+        Map<String, List<Province>> listMap = userService.queryUsersDistrubution();
+        System.out.println(listMap);
     }
 }
