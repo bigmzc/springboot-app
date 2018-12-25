@@ -32,7 +32,7 @@ public class Album implements Serializable {
     private String title;
     @ExcelIgnore
     private Integer count;
-    @Excel(name = "封面", type = 2, width = 30, height = 20, needMerge = true)
+    @Excel(name = "封面", type = 2, width = 30, height = 20, needMerge = true, imageType = 1)
     private String coverImg;
     @ExcelIgnore
     private Integer score;

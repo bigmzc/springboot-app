@@ -7,6 +7,8 @@ import com.baizhi.entity.Banner;
 import com.baizhi.mapper.AlbumMapper;
 import com.baizhi.mapper.BannerMapper;
 import com.baizhi.service.BannerService;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -53,6 +55,15 @@ public class BaseEnvTest {
         Album album = new Album();
         album.setId(7);
         Album album1 = albumMapper.selectOne(album);
+
+    }
+
+    @Test
+    public void test4() {
+        //创建工作簿
+        Workbook workbook = new HSSFWorkbook();
+        //创建表 参数为表名
+        Sheet sheet = workbook.createSheet("a1");
 
     }
 
