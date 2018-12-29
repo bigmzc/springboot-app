@@ -110,7 +110,7 @@
             <version>1.0.2</version>
         </dependency>
 
-        <!--到处Excel相关-->
+        <!--导出Excel相关-->
         <dependency>
             <groupId>cn.afterturn</groupId>
             <artifactId>easypoi-base</artifactId>
@@ -126,7 +126,23 @@
             <artifactId>easypoi-annotation</artifactId>
             <version>3.2.0</version>
         </dependency>
+
+        <!--GoEasy依赖-->
+        <dependency>
+            <groupId>io.goeasy</groupId>
+            <artifactId>goeasy-sdk</artifactId>
+            <version>0.3.8</version>
+        </dependency>
     </dependencies>
+
+    <!--Goeasy长连接仓库-->
+    <repositories>
+        <repository>
+            <id>goeasy</id>
+            <name>goeasy</name>
+            <url>http://maven.goeasy.io/content/repositories/releases/</url>
+        </repository>
+    </repositories>
 
     <build>
         <finalName>springboot-app</finalName>

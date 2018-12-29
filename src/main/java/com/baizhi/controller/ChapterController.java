@@ -75,8 +75,8 @@ public class ChapterController {
     //文件下载
     @RequestMapping("/download")
     @ResponseBody
-    public void fileDownload(HttpServletResponse response, String fileName) throws UnsupportedEncodingException {
-        System.out.println(fileName);
+    public void fileDownload(HttpServletResponse response, String fileName)
+            throws UnsupportedEncodingException {
         String[] strings = fileName.split("/");
 
         String realFileName = strings[3];

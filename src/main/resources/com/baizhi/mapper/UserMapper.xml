@@ -10,6 +10,6 @@
     </select>
 
     <select id="queryUsersDistrubutionBySex" resultType="Province">
-        select count(*) value,province name from user where sex=${sex} group by province
+        select count(*) value,province name from user where sex="${sex}" group by province
     </select>
 </mapper>

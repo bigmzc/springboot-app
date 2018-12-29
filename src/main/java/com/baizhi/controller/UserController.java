@@ -22,6 +22,10 @@ public class UserController {
     @ResponseBody
     public UserDto activeUser() {
         UserDto userDto = userService.queryActiveUsers();
+        //String jsonString = JSONObject.toJSONString(userDto);
+        //GoEasy goEasy = new GoEasy("http://rest-hangzhou.goeasy.io","BC-844b432942ef47f4bad2483455ff6945");
+        //System.out.println(jsonString);
+        //goEasy.publish("userana",jsonString);
         return userDto;
     }
 
