@@ -12,7 +12,7 @@
 
     option2 = {
         title: {
-            text: '持明法洲APP用户分布图',
+            text: 'APP用户分布图',
             subtext: '2018年12月25统计',
             left: 'center'
         },

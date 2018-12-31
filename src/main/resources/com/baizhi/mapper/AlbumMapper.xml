@@ -30,5 +30,9 @@
         from (select * from album limit ${(curPage-1)*pageSize},${pageSize}) a left join chapter c on a.Id = c.album_id
     </select>
 
-
+    <select id="queryAlbumLasted6" resultType="Album">
+        select Id,title,count,cover_img coverImg,score,
+        author,broadcast,brief,pub_date pubDate
+        from album order by pub_date limit 0,5
+    </select>
 </mapper>

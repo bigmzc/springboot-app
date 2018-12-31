@@ -14,7 +14,7 @@
     // 指定图表的配置项和数据
     var option = {
         title: {
-            text: '持名法州App活跃用户'
+            text: 'App活跃用户'
         },
         tooltip: {},
         legend: {

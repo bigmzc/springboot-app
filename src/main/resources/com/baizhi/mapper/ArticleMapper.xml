@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baizhi.mapper.ArticleMapper">
+
+    <resultMap id="rm" type="Article">
+        <id column="aid" property="id"/>
+        <result column="atitle" property="title"/>
+        <result column="ainsertImg" property="insertImg"/>
+        <result column="acontent" property="content"/>
+        <result column="apubDate" property="pubDate"/>
+
+        <association property="guru" javaType="Guru">
+            <id column="gid" property="id"/>
+            <result column="gdharma" property="dharma"/>
+            <result column="gheadPic" property="headPic"/>
+            <result column="gstatus" property="status"/>
+        </association>
+    </resultMap>
+
+    <select id="queryArticleRandom2" resultMap="rm">
+        select a.id aid,a.title atitle,a.insert_img ainsertImg,content acontent,a.pub_date apubDate,
+        g.id gid,g.dharma gdharma,g.head_pic gheadPic,g.status gstatus
+        from article a left join guru g on a.guru_id = g.Id order by a.pub_date limit 0,2
+    </select>
+
+    <select id="queryOtherGuruArticle" resultType="Article">
+        select id,title,insert_img insertImg,content,pub_date pubDate,guru_id from article
+        where guru_id != #{guruId}
+    </select>
+</mapper>

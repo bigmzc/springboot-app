@@ -5,4 +5,9 @@
         select Id,title,Img_path ImgPath,status,pub_date pubDate,description
         from banner limit ${(curPage-1)*pageSize},${pageSize}
     </select>
+
+    <select id="queryBanner5" resultType="Banner">
+        select Id,Img_path ImgPath,description
+        from banner where status='Y'
+    </select>
 </mapper>

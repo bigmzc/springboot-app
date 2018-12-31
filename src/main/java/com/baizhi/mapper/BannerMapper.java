@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface BannerMapper extends Mapper<Banner> {
     List<Banner> queryBannerByPage(@Param("curPage") int curPage, @Param("pageSize") int pageSize);
+
+    List<Banner> queryBanner5();
 }

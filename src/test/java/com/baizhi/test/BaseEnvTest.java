@@ -4,9 +4,11 @@ import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.entity.ExportParams;
 import com.baizhi.dto.UserDto;
 import com.baizhi.entity.Album;
+import com.baizhi.entity.Article;
 import com.baizhi.entity.Banner;
 import com.baizhi.entity.Province;
 import com.baizhi.mapper.AlbumMapper;
+import com.baizhi.mapper.ArticleMapper;
 import com.baizhi.mapper.BannerMapper;
 import com.baizhi.mapper.UserMapper;
 import com.baizhi.service.BannerService;
@@ -42,6 +44,9 @@ public class BaseEnvTest {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private ArticleMapper articleMapper;
 
     @Autowired
     UserService userService;
@@ -103,4 +108,14 @@ public class BaseEnvTest {
         Map<String, List<Province>> listMap = userService.queryUsersDistrubution();
         System.out.println(listMap);
     }
+
+    @Test
+    public void test7() {
+        Article article = new Article();
+        article.setGuruId(1);
+        List<Article> articles = articleMapper.select(article);
+        System.out.println(articles);
+    }
+
+
 }
