@@ -7,10 +7,7 @@ import com.baizhi.entity.Album;
 import com.baizhi.entity.Article;
 import com.baizhi.entity.Banner;
 import com.baizhi.entity.Province;
-import com.baizhi.mapper.AlbumMapper;
-import com.baizhi.mapper.ArticleMapper;
-import com.baizhi.mapper.BannerMapper;
-import com.baizhi.mapper.UserMapper;
+import com.baizhi.mapper.*;
 import com.baizhi.service.BannerService;
 import com.baizhi.service.UserService;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -47,6 +44,9 @@ public class BaseEnvTest {
 
     @Autowired
     private ArticleMapper articleMapper;
+
+    @Autowired
+    private ChapterMapper chapterMapper;
 
     @Autowired
     UserService userService;
@@ -115,6 +115,14 @@ public class BaseEnvTest {
         article.setGuruId(1);
         List<Article> articles = articleMapper.select(article);
         System.out.println(articles);
+    }
+
+    @Test
+    public void test8() {
+        Album album = new Album();
+        album.setId(Integer.parseInt("1"));
+        Album album1 = albumMapper.selectOne(album);
+        System.out.println(album1);
     }
 
 

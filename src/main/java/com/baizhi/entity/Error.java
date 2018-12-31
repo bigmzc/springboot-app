@@ -11,5 +11,6 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Error implements Serializable {
-    private String message;
+    private String error;
+    private String errmsg;
 }

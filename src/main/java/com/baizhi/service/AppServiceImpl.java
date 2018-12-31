@@ -1,8 +1,6 @@
 package com.baizhi.service;
 
-import com.baizhi.entity.Album;
-import com.baizhi.entity.Article;
-import com.baizhi.entity.Banner;
+import com.baizhi.entity.*;
 import com.baizhi.entity.Error;
 import com.baizhi.mapper.AlbumMapper;
 import com.baizhi.mapper.ArticleMapper;
@@ -38,7 +36,7 @@ public class AppServiceImpl implements AppService {
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public Object queryFirstPage(String uid, String type, String sub_type) {
         if (uid == null || type == null) {
-            return new Error("args error");
+            return new Error(null, "args error");
         } else {
             if (type.equals("all")) {
                 Map<String, Object> map = new HashMap<>();
@@ -75,11 +73,27 @@ public class AppServiceImpl implements AppService {
                     map.put("artical", articles);
                     return map;
                 } else {
-                    return new Error("sub_type need data");
+                    return new Error(null, "sub_type need data");
                 }
             } else {
-                return new Error("无效的type类型");
+                return new Error(null, "无效的type类型");
             }
         }
+    }
+
+    @Override
+    public Object detailOfWen(String id, String uid) {
+        Map<String, Object> map = new HashMap<>();
+        Album album = new Album();
+        album.setId(Integer.parseInt(id));
+        Album album1 = albumMapper.selectOne(album);
+        //System.out.println(album1);
+        map.put("introduction", album1);
+
+        Chapter chapter = new Chapter();
+        chapter.setAlbumId(Integer.parseInt(id));
+        List<Chapter> chapters = chapterMapper.select(chapter);
+        map.put("list", chapters);
+        return map;
     }
 }

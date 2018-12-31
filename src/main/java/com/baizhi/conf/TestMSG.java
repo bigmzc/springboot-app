@@ -1,4 +1,4 @@
-/*
+
 package com.baizhi.conf;
 
 import com.aliyuncs.DefaultAcsClient;
@@ -51,4 +51,4 @@ public class TestMSG {
         }
     }
 }
-*/
+

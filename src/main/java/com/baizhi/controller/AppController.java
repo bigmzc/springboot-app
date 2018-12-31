@@ -20,4 +20,12 @@ public class AppController {
         Object result = appService.queryFirstPage(uid, type, sub_type);
         return result;
     }
+
+    //闻详情页
+    @RequestMapping("/weninfo")
+    @ResponseBody
+    public Object queryAlbumInfoAndChapter(String id, String uid) {
+        Object detailOfWen = appService.detailOfWen(id, uid);
+        return detailOfWen;
+    }
 }
