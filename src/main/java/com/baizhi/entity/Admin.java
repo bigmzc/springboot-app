@@ -6,7 +6,9 @@ import lombok.NoArgsConstructor;
 import tk.mybatis.mapper.annotation.KeySql;
 
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -18,4 +20,6 @@ public class Admin implements Serializable {
     private Integer id;
     private String username;
     private String password;
+    @Transient
+    private List<Role> roles;
 }

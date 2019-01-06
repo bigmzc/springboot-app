@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baizhi.mapper.AdminMapper">
+
+    <resultMap id="rm1" type="Admin">
+        <id column="aid" property="id"/>
+        <result column="ausername" property="username"/>
+        <result column="apassword" property="password"/>
+
+        <collection property="roles" ofType="Role">
+            <id column="rid" property="id"/>
+            <result column="rrolename" property="rolename"/>
+        </collection>
+    </resultMap>
+
+    <select id="queryRolesByUserName" resultMap="rm1">
+        select a.id aid,a.username ausername,a.password apassword,r.Id rid,r.rolename rrolename
+        from admin a left join `admin-role` ar on a.Id=ar.uid left join role r on ar.rid = r.Id
+        where a.username=#{username}
+    </select>
+
+</mapper>

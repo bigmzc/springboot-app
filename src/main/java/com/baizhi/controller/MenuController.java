@@ -20,7 +20,6 @@ public class MenuController {
     @ResponseBody
     public List<Menu> getAllMenu() {
         List<Menu> menus = menuService.queryAllMainMenu();
-        System.out.println(menus);
         return menus;
     }
 

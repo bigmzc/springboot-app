@@ -17,8 +17,15 @@ public class AdminServiceImpl implements AdminService {
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public Admin queryOneAdminByUsername(String username) {
-        Admin admin = new Admin(null, username, null);
+        Admin admin = new Admin(null, username, null, null);
         Admin res = adminMapper.selectOne(admin);
         return res;
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public Admin queryAdminRolesByUserName(String username) {
+        Admin admin = adminMapper.queryRolesByUserName(username);
+        return admin;
     }
 }

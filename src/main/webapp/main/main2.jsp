@@ -26,22 +26,32 @@
                     var id = n.id;
                     var text = n.title;
                     if (i == 0) {
-                        <shiro:hasPermission name="user:add">
                         $("#LeftAccordion").accordion("add", {
                             title: n.title,
                             iconCls: n.iconcls,
                             selected: true,
                             content: "<ul id='tree" + id + "' ></ul>"
                         });
-                        </shiro:hasPermission>
-
                     } else {
-                        $("#LeftAccordion").accordion("add", {
-                            title: n.title,
-                            iconCls: n.iconcls,
-                            selected: false,
-                            content: "<ul id='tree" + id + "'></ul>"
-                        });
+                        //用户角色判定
+                        if (text == "管理员模块") {
+                            <shiro:hasRole name="super">
+                            $("#LeftAccordion").accordion("add", {
+                                title: n.title,
+                                iconCls: n.iconcls,
+                                selected: false,
+                                content: "<ul id='tree" + id + "'></ul>"
+                            });
+                            </shiro:hasRole>
+                        } else {
+                            $("#LeftAccordion").accordion("add", {
+                                title: n.title,
+                                iconCls: n.iconcls,
+                                selected: false,
+                                content: "<ul id='tree" + id + "'></ul>"
+                            });
+                        }
+
                     }
 
                     $.ajax({
