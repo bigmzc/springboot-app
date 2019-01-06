@@ -16,7 +16,7 @@ import java.util.Random;
 
 @Controller
 @RequestMapping("/identify")
-public class MsgCodeCOntroller {
+public class MsgCodeController {
 
     @RequestMapping("/code")
     @ResponseBody
@@ -53,7 +53,7 @@ public class MsgCodeCOntroller {
         request.setTemplateCode("SMS_141606919");
         //request.setTemplateParam("{\"code\":\"8888\"}");
         String prefix = "{code:" + codeContain + "}";
-
+        //codeContain设置到redis
         request.setTemplateParam(prefix);
         request.setOutId("yourOutId");
 

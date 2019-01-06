@@ -7,7 +7,7 @@
     <meta http-equiv="description" content="this is my page">
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 
-    <link rel="icon" href="${pageContext.request.contextPath}/img/favicon.ico" type="image/x-icon"/>
+    <%--<link rel="icon" href="${pageContext.request.contextPath}/img/favicon.ico" type="image/x-icon"/>--%>
     <link rel="stylesheet" href="css/common.css" type="text/css"></link>
     <link rel="stylesheet" href="css/login.css" type="text/css"></link>
     <script type="text/javascript" src="${pageContext.request.contextPath}/script/jquery.js"></script>
@@ -23,7 +23,7 @@
             //  form 表单提交
             $("#loginForm").bind("submit", function () {
                 var form = new FormData($("#loginForm"));
-                $.post("${pageContext.request.contextPath}/admin/loginController", form);
+                $.post("${pageContext.request.contextPath}/admin/login", form);
                 return false;
             });
         });
@@ -32,7 +32,7 @@
 <body>
 
 <div class="login">
-    <form id="loginForm" action="${pageContext.request.contextPath}/admin/loginController" method="post">
+    <form id="loginForm" action="${pageContext.request.contextPath}/admin/login" method="post">
         <table>
             <tbody>
             <tr>

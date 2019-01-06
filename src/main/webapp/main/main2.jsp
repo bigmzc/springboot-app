@@ -1,5 +1,6 @@
 ﻿<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" isELIgnored="false" %>
 <%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
+<%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -25,13 +26,15 @@
                     var id = n.id;
                     var text = n.title;
                     if (i == 0) {
-                        //console.log(n.iconcls);
+                        <shiro:hasPermission name="user:add">
                         $("#LeftAccordion").accordion("add", {
                             title: n.title,
                             iconCls: n.iconcls,
                             selected: true,
                             content: "<ul id='tree" + id + "' ></ul>"
                         });
+                        </shiro:hasPermission>
+
                     } else {
                         $("#LeftAccordion").accordion("add", {
                             title: n.title,
@@ -102,7 +105,7 @@
         持名法州后台管理系统
     </div>
     <div style="font-size: 16px;color: #FAF7F7;font-family: 楷体;width: 300px;float:right;padding-top:15px">
-        欢迎您:${sessionScope.username}
+        欢迎您:<shiro:principal></shiro:principal>
         &nbsp;<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">修改密码</a>&nbsp;&nbsp;
         <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-01'">退出系统</a>
     </div>
