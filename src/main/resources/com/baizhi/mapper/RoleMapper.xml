@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baizhi.mapper.RoleMapper">
+
+    <resultMap id="rm2" type="Role">
+        <id column="rid" property="id"/>
+        <result column="rrolename" property="rolename"/>
+
+        <collection property="permissions" ofType="Permission">
+            <id column="pid" property="id"/>
+            <result column="ppermissionname" property="permissionname"/>
+        </collection>
+    </resultMap>
+
+    <select id="queryPermissionByRoleName" resultMap="rm2">
+        select r.id rid,r.rolename rrolename,p.Id pid,p.permissionname ppermissionname
+        from role r left join `role-permission` rp on r.Id=rp.rid left join permission p on rp.pid=p.Id
+        where r.rolename=#{roleName}
+    </select>
+
+</mapper>

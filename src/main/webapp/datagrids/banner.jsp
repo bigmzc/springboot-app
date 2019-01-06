@@ -27,7 +27,6 @@
             text: "删除",
             iconCls: 'icon-remove',
             handler: function () {
-                //alert('帮助按钮')
                 var row = $("#bannerdatagrid").edatagrid("getSelected");
                 if (row != null) {
                     $.post("${pageContext.request.contextPath}/banner/deleteOneBanner?bannerId=" + row.id, function (data) {

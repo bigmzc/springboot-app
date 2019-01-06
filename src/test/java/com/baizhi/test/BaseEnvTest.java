@@ -3,12 +3,10 @@ package com.baizhi.test;
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.entity.ExportParams;
 import com.baizhi.dto.UserDto;
-import com.baizhi.entity.Album;
-import com.baizhi.entity.Article;
-import com.baizhi.entity.Banner;
-import com.baizhi.entity.Province;
+import com.baizhi.entity.*;
 import com.baizhi.mapper.*;
 import com.baizhi.service.BannerService;
+import com.baizhi.service.RoleService;
 import com.baizhi.service.UserService;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -50,6 +48,9 @@ public class BaseEnvTest {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    private RoleService roleService;
 
     @Test
     public void test1() {
@@ -123,6 +124,15 @@ public class BaseEnvTest {
         album.setId(Integer.parseInt("1"));
         Album album1 = albumMapper.selectOne(album);
         System.out.println(album1);
+    }
+
+
+    @Test
+    public void test9() {
+        List<Role> admin = roleService.queryPermissionByRoleName("admin");
+        for (Role role : admin) {
+            System.out.println(role);
+        }
     }
 
 

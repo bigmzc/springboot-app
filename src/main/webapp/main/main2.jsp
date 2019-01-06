@@ -43,6 +43,7 @@
                                 content: "<ul id='tree" + id + "'></ul>"
                             });
                             </shiro:hasRole>
+
                         } else {
                             $("#LeftAccordion").accordion("add", {
                                 title: n.title,

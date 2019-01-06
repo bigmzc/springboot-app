@@ -44,7 +44,7 @@ public class AdminController {
 
     @RequestMapping("/login")
     public String adminLogin(Admin admin, String vcode, HttpSession session) {
-        System.out.println(admin);
+        //System.out.println(admin);
         if (admin.getUsername() == null) {
             return "redirect:/login.jsp";
         } else {
