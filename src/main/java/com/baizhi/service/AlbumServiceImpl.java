@@ -2,6 +2,7 @@ package com.baizhi.service;
 
 import com.baizhi.dto.AlbumDto;
 import com.baizhi.entity.Album;
+import com.baizhi.luceneservice.LuceneAlbumService;
 import com.baizhi.mapper.AlbumMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,9 @@ public class AlbumServiceImpl implements AlbumService {
 
     @Autowired
     private AlbumMapper albumMapper;
+
+    @Autowired
+    private LuceneAlbumService luceneAlbumService;
 
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -32,7 +36,10 @@ public class AlbumServiceImpl implements AlbumService {
 
     @Override
     public void insertOneAlbum(Album album) {
+        //插入db
         albumMapper.insert(album);
+        //创建lucene索引
+        luceneAlbumService.createIndex(album);
     }
 
     @Override
@@ -51,6 +58,13 @@ public class AlbumServiceImpl implements AlbumService {
         AlbumDto albumDto = new AlbumDto();
         int count = albumMapper.selectCount(new Album());
         List<Album> albums = albumMapper.queryAllAlbumByPage(curPage, count);
+        return albums;
+    }
+
+    //Lucene搜索
+    @Override
+    public List<Album> queryBykeyWords(String keyWords) {
+        List<Album> albums = luceneAlbumService.searchIndex(keyWords);
         return albums;
     }
 }

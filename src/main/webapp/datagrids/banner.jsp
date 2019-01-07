@@ -1,4 +1,5 @@
 <%@page pageEncoding="UTF-8" %>
+<%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <script type="text/javascript">
     $(function () {
         var toolbar = [{
@@ -27,6 +28,7 @@
             text: "删除",
             iconCls: 'icon-remove',
             handler: function () {
+                <shiro:hasPermission name="banner:delete">
                 var row = $("#bannerdatagrid").edatagrid("getSelected");
                 if (row != null) {
                     $.post("${pageContext.request.contextPath}/banner/deleteOneBanner?bannerId=" + row.id, function (data) {
@@ -39,6 +41,7 @@
                 } else {
                     alert("请先选中行");
                 }
+                </shiro:hasPermission>
             }
         }, '-', {
             text: "保存",

@@ -3,7 +3,11 @@ package com.baizhi.test;
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.entity.ExportParams;
 import com.baizhi.dto.UserDto;
-import com.baizhi.entity.*;
+import com.baizhi.entity.Album;
+import com.baizhi.entity.Article;
+import com.baizhi.entity.Banner;
+import com.baizhi.entity.Province;
+import com.baizhi.luceneservice.LuceneAlbumService;
 import com.baizhi.mapper.*;
 import com.baizhi.service.BannerService;
 import com.baizhi.service.RoleService;
@@ -48,6 +52,9 @@ public class BaseEnvTest {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    LuceneAlbumService luceneAlbumService;
 
     @Autowired
     private RoleService roleService;
@@ -126,14 +133,13 @@ public class BaseEnvTest {
         System.out.println(album1);
     }
 
-
     @Test
-    public void test9() {
-        List<Role> admin = roleService.queryPermissionByRoleName("admin");
-        for (Role role : admin) {
-            System.out.println(role);
-        }
+    public void testQuerySearch() {
+        List<Album> albums = luceneAlbumService.searchIndex("带");
+        /*System.out.println(albums);
+        LuceneAlbumService luceneAlbumService1 = new LuceneAlbumServiceImpl();
+        List<Album> albums = luceneAlbumService1.searchIndex("今晚");
+        System.out.println(albums);*/
     }
-
 
 }

@@ -30,6 +30,8 @@ public class ShiroFilterConf {
         map.put("/admin/*", "anon");
         map.put("/index.jsp", "anon");
         map.put("/img/createImg", "anon");
+        map.put("/script/*", "anon");
+        map.put("/css/*", "anon");
         //多个过滤器组成过滤器链
         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
         //设置认证页面路径

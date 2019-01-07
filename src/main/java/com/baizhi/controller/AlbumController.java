@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 @RequestMapping("/album")
@@ -53,6 +54,14 @@ public class AlbumController {
     public Album queryOneById(Integer id) {
         Album album = albumService.queryOneAlbumById(id);
         return album;
+    }
+
+    @RequestMapping("/quickSearch")
+    @ResponseBody
+    public List<Album> luceneQuickSearch(String keyWords) {
+        List<Album> albums = albumService.queryBykeyWords(keyWords);
+        System.out.println(albums);
+        return albums;
     }
 
 }

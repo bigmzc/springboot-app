@@ -50,7 +50,7 @@
             iconCls: 'icon-save',
             handler: function () {
                 var row4 = $("#albumdatagrid").treegrid("getSelected");
-                console.log(row4.url);
+                //console.log(row4.url);
                 if (row4 != null) {
                     window.location.href = "${pageContext.request.contextPath}/chapter/download2?fileName=" + row4.url + "&title=" + row4.title;
                 }
@@ -59,7 +59,7 @@
             text: "导入",
             iconCls: 'icon-add',
             handler: function () {
-
+                alert("plz edit");
             }
         }, '-', {
             text: "导出",
@@ -85,6 +85,7 @@
             fitColumns: true,
             toolbar: toolbar,
             pagination: true,
+            pagePosition: "top",
             pageSize: 5,
             pageList: [3, 5, 7, 10],
             onDblClickRow: function (row) {
@@ -130,9 +131,24 @@
             href: "${pageContext.request.contextPath}/datagrids/addaudio.jsp"
         })
 
-
+        //初始化searchbox
+        $("#searchbox").searchbox({
+            menu: "#menu1",
+            searcher: function (value, name) {
+                console.log(value);
+                $.post("${pageContext.request.contextPath}/album/quickSearch?keyWords=" + value, function (data) {
+                    //
+                });
+            }
+        });
     })
 </script>
+搜索:<input id="searchbox" align="center"/>
+<div id="menu1">
+    <div data-options="name:'dh'">关键词</div>
+    <%--<div data-options="name:'xm'">Title</div>
+    <div data-options="name:'yx'">author</div>--%>
+</div>
 <table id="albumdatagrid"></table>
 <div id="addAlbumDialog"></div>
 <div id="albumInfoDialog"></div>
